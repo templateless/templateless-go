@@ -8,6 +8,7 @@ const (
 	AccountQuotaExceeded BadRequestCode = 200
 	ProviderKeyMissing   BadRequestCode = 300
 	ProviderKeyInvalid   BadRequestCode = 301
+	EmailNoContent       BadRequestCode = 400
 )
 
 func (code BadRequestCode) Error() string {
@@ -18,6 +19,8 @@ func (code BadRequestCode) Error() string {
 		return "provider key missing"
 	case ProviderKeyInvalid:
 		return "provider key invalid"
+	case EmailNoContent:
+		return "email has no content"
 	default:
 		return "unknown bad request code"
 	}
