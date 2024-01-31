@@ -11,10 +11,48 @@ Don't waste time messing around with HTML or HTML builders.
 
 **Get your free API key [here](https://app.templateless.com).**
 
+## Getting Started
+
+Use go get.
+
+```bash
+go get github.com/templateless/templateless-go
+```
+
+Then import the package into your own code.
+
+```go
+import "github.com/templateless/templateless-go"
+```
+
 ## Quick Example
 
 ```go
-@TODO
+package main
+
+import (
+	"log"
+
+	"github.com/templateless/templateless-go"
+)
+
+func main() {
+	content, _ := templateless.NewContent().
+		Text("Hello world").
+		Build()
+
+	emailAddress := templateless.NewEmailAddress("user@example.com")
+	email, _ := templateless.NewEmail().
+		To(*emailAddress).
+		Subject("Hello 👋").
+		Content(*content).
+		Build()
+
+	result, _ := templateless.NewTemplateless("<YOUR_API_KEY>").
+		Send(*email)
+
+	log.Println(result)
+}
 ```
 
 ## License
