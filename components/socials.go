@@ -3,11 +3,22 @@ package components
 type Service string
 
 const (
-	Website Service = "WEBSITE"
-	Email   Service = "EMAIL"
-	Twitter Service = "TWITTER"
-	X       Service = "X"
-	Github  Service = "GITHUB"
+	Website   Service = "WEBSITE"
+	Email     Service = "EMAIL"
+	Phone     Service = "PHONE"
+	Facebook  Service = "FACEBOOK"
+	YouTube   Service = "YOUTUBE"
+	Twitter   Service = "TWITTER"
+	X         Service = "X"
+	GitHub    Service = "GITHUB"
+	Instagram Service = "INSTAGRAM"
+	LinkedIn  Service = "LINKEDIN"
+	Slack     Service = "SLACK"
+	Discord   Service = "DISCORD"
+	TikTok    Service = "TIKTOK"
+	Snapchat  Service = "SNAPCHAT"
+	Threads   Service = "THREADS"
+	Telegram  Service = "TELEGRAM"
 )
 
 type SocialItem struct {
