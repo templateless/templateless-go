@@ -1,5 +1,10 @@
 # CHANGELOG
 
+**v0.1.0-alpha.2:**
+- `README.md` cleanup (listing of components)
+- Added `examples/confirm_email`
+- Renamed `SetFooter()` to `Footer()`
+
 **v0.1.0-alpha.1:**
 - Introduced `CHANGELOG.md`
 - Introduced new services as social icons:

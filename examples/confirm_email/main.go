@@ -11,14 +11,12 @@ import (
 func main() {
 	apiKey := os.Getenv("TEMPLATELESS_API_KEY")
 	if apiKey == "" {
-		log.Println("Set TEMPLATELESS_API_KEY to your Templateless API key")
-		return
+		log.Fatal("Set TEMPLATELESS_API_KEY to your Templateless API key")
 	}
 
 	emailAddress := os.Getenv("TEMPLATELESS_EMAIL_ADDRESS")
 	if emailAddress == "" {
-		log.Println("Set TEMPLATELESS_EMAIL_ADDRESS to your own email address")
-		return
+		log.Fatal("Set TEMPLATELESS_EMAIL_ADDRESS to your own email address")
 	}
 
 	header, _ := templateless.NewHeader().

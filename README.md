@@ -40,7 +40,7 @@ It's perfect for SaaS, web apps, mobile apps, scripts and anywhere you have to s
 Use go get:
 
 ```bash
-go get github.com/templateless/templateless-go@v0.1.0-alpha.1
+go get github.com/templateless/templateless-go@v0.1.0-alpha.2
 ```
 
 Then import the package into your own code:
