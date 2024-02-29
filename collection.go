@@ -10,7 +10,13 @@ type Collection struct {
 	Components []components.Component `json:"components"`
 }
 
-func NewCollection() *Collection {
+func NewHeader() *Collection {
+	return &Collection{
+		Components: make([]components.Component, 0),
+	}
+}
+
+func NewFooter() *Collection {
 	return &Collection{
 		Components: make([]components.Component, 0),
 	}
