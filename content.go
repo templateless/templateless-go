@@ -41,7 +41,7 @@ func (c *Content) Header(header Collection) *Content {
 	return c
 }
 
-func (c *Content) SetFooter(footer Collection) *Content {
+func (c *Content) Footer(footer Collection) *Content {
 	c.Footer_ = footer.Components
 	return c
 }
