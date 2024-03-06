@@ -40,7 +40,7 @@ It's perfect for SaaS, web apps, mobile apps, scripts and anywhere you have to s
 Use go get:
 
 ```bash
-go get github.com/templateless/templateless-go@v0.1.0-alpha.2
+go get github.com/templateless/templateless-go@v0.1.0-alpha.3
 ```
 
 Then import the package into your own code:
@@ -96,6 +96,18 @@ There are more Go examples in the [examples](examples) folder ✨
 
 > [!NOTE]
 > 🚧 **The SDK is not stable yet.** This API might change as more features are added. Please watch the repo for the changes in the [CHANGELOG](CHANGELOG.md).
+
+## 🏗 Debugging
+
+You can generate _test API keys_ by activating the **Test Mode** in your dashboard. By using these keys, you'll be able to view your fully rendered emails without actually sending them.
+
+When you use a test API key in your SDK, the following output will appear in your logs when you try to send an email:
+
+```log
+Templateless [TEST MODE]: Emailed user@example.com, preview: https://tmpl.sh/ATMxHLX4r9aE
+```
+
+The preview link will display the email, but you must be logged in to Templateless to view it.
 
 ## 🔳 Components
 
@@ -248,7 +260,7 @@ If you'd like your recipients to be able to read the email in a browser, you can
 
 You can optionally provide the text for the link. If none is provided, default is used: "View in browser"
 
-**This will make the email public to anyone that has access to the link.**
+**Anyone who knows the link will be able to see the email.**
 
 ```go
 templateless.NewContent().

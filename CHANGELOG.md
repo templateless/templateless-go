@@ -1,5 +1,9 @@
 # CHANGELOG
 
+**v0.1.0-alpha.3:**
+- `README.md`: notice about test mode
+- Support for test mode logging
+
 **v0.1.0-alpha.2:**
 - `README.md` cleanup (listing of components)
 - Added `examples/confirm_email`

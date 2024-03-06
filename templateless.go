@@ -5,14 +5,21 @@ import (
 	"encoding/json"
 	"fmt"
 	"io"
+	"log"
 	"net/http"
 	"os"
 )
 
 type ObjectId = string
 
+type EmailResponsePreview struct {
+	Email   string `json:"email"`
+	Preview string `json:"preview"`
+}
+
 type EmailResponse struct {
-	Emails []ObjectId
+	Emails   []ObjectId              `json:"emails"`
+	Previews *[]EmailResponsePreview `json:"previews"`
 }
 
 type Templateless struct {
@@ -107,6 +114,13 @@ func (t *Templateless) SendMany(emails []Email) ([]ObjectId, *CustomError) {
 		var emailResponse EmailResponse
 		if err := json.Unmarshal(body, &emailResponse); err != nil {
 			return nil, UnknownError()
+		}
+
+		if emailResponse.Previews != nil {
+			for _, preview := range *emailResponse.Previews {
+				log.Printf("Templateless [TEST MODE]: Emailed %s, preview: https://tmpl.sh/%s\n",
+					preview.Email, preview.Preview)
+			}
 		}
 
 		return emailResponse.Emails, nil
