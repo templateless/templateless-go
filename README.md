@@ -40,7 +40,7 @@ It's perfect for SaaS, web apps, mobile apps, scripts and anywhere you have to s
 Use go get:
 
 ```bash
-go get github.com/templateless/templateless-go@v0.1.0-alpha.3
+go get github.com/templateless/templateless-go@v0.1.0-alpha.4
 ```
 
 Then import the package into your own code:
@@ -85,10 +85,8 @@ func main() {
 		Content(*content).
 		Build()
 
-	result, _ := templateless.NewTemplateless("<YOUR_API_KEY>").
+	templateless.NewTemplateless("<YOUR_API_KEY>").
 		Send(*email)
-
-	log.Println(result)
 }
 ```
 
@@ -159,8 +157,7 @@ Link component adds an anchor tag. This is the same as a text component with the
 
 ```go
 templateless.NewContent().
-	Link("Confirm Email", "https://example.com/confirm?token=XYZ"). // or...
-	Text("[Confirm Email](https://example.com/confirm?token=XYZ)").
+	Link("Confirm Email", "https://example.com/confirm?token=XYZ").
 	Build()
 ```
 
@@ -181,13 +178,25 @@ templateless.NewContent().
 Image component will link to an image within your email. Keep in mind that a lot of email clients will prevent images from being loaded automatically for privacy reasons.
 
 ```go
+// Simple
 templateless.NewContent().
-	Image(
-		"https://placekitten.com/300/200",  // where the image is hosted
-		"https://example.com",        		// [optional] link url, if you want it to be clickable
-		300,                          		// [optional] width
-		200,                          		// [optional] height
-		"Alt text",                   		// [optional] alternate text
+	Image("https://placekitten.com/300/200").
+	Build()
+
+// Clickable & with attributes
+url := "https://example.com"
+width := 300
+height := 200
+alt := "Alt text"
+templateless.NewContent().
+	Component(
+		components.NewImage(
+			"https://placekitten.com/300/200",
+			&url,
+			&width,
+			&height,
+			&alt,
+		),
 	).
 	Build()
 ```
@@ -249,6 +258,8 @@ templateless.NewContent().
 		*components.NewSocialItem(components.Snapchat, "Username"),
 		*components.NewSocialItem(components.Threads, "Username"),
 		*components.NewSocialItem(components.Telegram, "Username"),
+		*components.NewSocialItem(components.Mastodon, "@Username@example.com"),
+		*components.NewSocialItem(components.Rss, "https://example.com/blog"),
 	}).
 	Build()
 ```
@@ -264,11 +275,98 @@ You can optionally provide the text for the link. If none is provided, default i
 
 ```go
 templateless.NewContent().
-	ViewInBrowser("Read Email in Browser").
+	ViewInBrowser().
 	Build()
 ```
 
 </details>
+<details><summary>Store Badges</summary>
+
+Link to your mobile apps via store badges:
+
+```go
+templateless.NewContent().
+	StoreBadges([]components.StoreBadgeItem{
+		*components.NewStoreBadgeItem(components.AppStore, "https://apps.apple.com/us/app/example/id1234567890"),
+		*components.NewStoreBadgeItem(components.GooglePlay, "https://play.google.com/store/apps/details?id=com.example"),
+		*components.NewStoreBadgeItem(components.MicrosoftStore, "https://apps.microsoft.com/detail/example"),
+	}).
+	Build()
+```
+
+</details>
+<details><summary>QR Code</summary>
+
+You can also generate QR codes on the fly. They will be shown as images inside the email.
+
+Here are all the supported data types:
+
+```go
+// URL
+templateless.NewContent().
+	QrCode("https://example.com").
+	Build()
+
+// Email
+templateless.NewContent().
+	Component(components.QrCodeEmail("user@example.com")).
+	Build()
+
+// Phone
+templateless.NewContent().
+	Component(components.QrCodePhone("123-456-7890")).
+	Build()
+
+// SMS / Text message
+templateless.NewContent().
+	Component(components.QrCodeSMS("123-456-7890")).
+	Build()
+
+// Geo coordinates
+templateless.NewContent().
+	Component(components.QrCodeCoordinates(37.773972, -122.431297)).
+	Build()
+
+// Crypto address (for now only Bitcoin and Ethereum are supported)
+templateless.NewContent().
+	Component(components.QrCodeCryptocurrencyAddress(components.Bitcoin, "1A1zP1eP5QGefi2DMPTfTL5SLmv7DivfNa")).
+	Build()
+
+// You can also encode any binary data
+templateless.NewContent().
+	Component(components.NewQrCode([]byte{1, 2, 3})).
+	Build()
+```
+
+</details>
+<details><summary>Signature</summary>
+
+Generated signatures can be added to your emails to give a bit of a personal touch. This will embed an image with your custom text using one of several available fonts:
+
+```go
+// Signature with a default font
+templateless.NewContent().
+	Signature("John Smith").
+	Build()
+
+// Signature with a custom font
+templateless.NewContent().
+	Component(components.NewSignature("John Smith", &components.ReenieBeanie)).
+	Build()
+```
+
+These are the available fonts:
+
+- `ReenieBeanie` [preview →](https://fonts.google.com/specimen/Reenie+Beanie)
+- `MeowScript` [preview →](https://fonts.google.com/specimen/Meow+Script)
+- `Caveat` [preview →](https://fonts.google.com/specimen/Caveat)
+- `Zeyada` [preview →](https://fonts.google.com/specimen/Zeyada)
+- `Petemoss` [preview →](https://fonts.google.com/specimen/Petemoss)
+
+Signature should not exceed 64 characters. Only alphanumeric characters and most common symbols are allowed.
+
+</details>
+
 
 ---
 

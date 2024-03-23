@@ -51,8 +51,8 @@ func (c *Content) Button(text, url string) *Content {
 	return c
 }
 
-func (c *Content) Image(src string, url string, width, height int, alt string) *Content {
-	c.Body_[0] = append(c.Body_[0], components.NewImage(src, alt, url, width, height))
+func (c *Content) Image(src string) *Content {
+	c.Body_[0] = append(c.Body_[0], components.NewImage(src, nil, nil, nil, nil))
 	return c
 }
 
@@ -76,8 +76,28 @@ func (c *Content) Text(text string) *Content {
 	return c
 }
 
-func (c *Content) ViewInBrowser(text string) *Content {
-	c.Body_[0] = append(c.Body_[0], components.NewViewInBrowser(text))
+func (c *Content) ViewInBrowser() *Content {
+	c.Body_[0] = append(c.Body_[0], components.NewViewInBrowser(nil))
+	return c
+}
+
+func (c *Content) QrCode(url string) *Content {
+	c.Body_[0] = append(c.Body_[0], components.QrCodeURL(url))
+	return c
+}
+
+func (c *Content) StoreBadges(data []components.StoreBadgeItem) *Content {
+	c.Body_[0] = append(c.Body_[0], components.NewStoreBadges(data))
+	return c
+}
+
+func (c *Content) Signature(text string) *Content {
+	c.Body_[0] = append(c.Body_[0], components.NewSignature(text, nil))
+	return c
+}
+
+func (c *Content) Component(component components.Component) *Content {
+	c.Body_[0] = append(c.Body_[0], component)
 	return c
 }
 

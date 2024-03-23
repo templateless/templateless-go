@@ -27,8 +27,8 @@ func (c *Collection) Button(text, url string) *Collection {
 	return c
 }
 
-func (c *Collection) Image(src string, url string, width, height int, alt string) *Collection {
-	c.Components = append(c.Components, components.NewImage(src, alt, url, width, height))
+func (c *Collection) Image(src string) *Collection {
+	c.Components = append(c.Components, components.NewImage(src, nil, nil, nil, nil))
 	return c
 }
 
@@ -52,8 +52,28 @@ func (c *Collection) Text(text string) *Collection {
 	return c
 }
 
-func (c *Collection) ViewInBrowser(text string) *Collection {
-	c.Components = append(c.Components, components.NewViewInBrowser(text))
+func (c *Collection) ViewInBrowser() *Collection {
+	c.Components = append(c.Components, components.NewViewInBrowser(nil))
+	return c
+}
+
+func (c *Collection) QrCode(url string) *Collection {
+	c.Components = append(c.Components, components.QrCodeURL(url))
+	return c
+}
+
+func (c *Collection) StoreBadges(data []components.StoreBadgeItem) *Collection {
+	c.Components = append(c.Components, components.NewStoreBadges(data))
+	return c
+}
+
+func (c *Collection) Signature(text string) *Collection {
+	c.Components = append(c.Components, components.NewSignature(text, nil))
+	return c
+}
+
+func (c *Collection) Component(component components.Component) *Collection {
+	c.Components = append(c.Components, component)
 	return c
 }
 

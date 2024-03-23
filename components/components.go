@@ -11,6 +11,9 @@ const (
 	ComponentIdSocials       ComponentId = "SOCIALS"
 	ComponentIdText          ComponentId = "TEXT"
 	ComponentIdViewInBrowser ComponentId = "VIEW_IN_BROWSER"
+	ComponentIdStoreBadges   ComponentId = "STORE_BADGES"
+	ComponentIdQrCode        ComponentId = "QR_CODE"
+	ComponentIdSignature     ComponentId = "SIGNATURE"
 )
 
 type Component interface {

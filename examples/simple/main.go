@@ -24,12 +24,10 @@ func main() {
 
 	email, _ := templateless.NewEmail().
 		To(*templateless.NewEmailAddress(emailAddress)).
-		Subject("Hello").
+		Subject("Hello 👋").
 		Content(*content).
 		Build()
 
-	result, _ := templateless.NewTemplateless(apiKey).
+	templateless.NewTemplateless(apiKey).
 		Send(*email)
-
-	log.Println(result)
 }

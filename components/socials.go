@@ -19,10 +19,12 @@ const (
 	Snapchat  Service = "SNAPCHAT"
 	Threads   Service = "THREADS"
 	Telegram  Service = "TELEGRAM"
+	Mastodon  Service = "MASTODON"
+	Rss       Service = "RSS"
 )
 
 type SocialItem struct {
-	Service Service `json:"service"`
+	Service Service `json:"key"`
 	Value   string  `json:"value"`
 }
 
